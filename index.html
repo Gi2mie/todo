@@ -62,21 +62,21 @@
     </div>
 </div>
 <div id="displayAddTask">
-    <div class="modal fade" id="modalAddTask" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalAddTask" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-modal="true">
         <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content mx-2">
-                <form action="">
+                <form action="" data-form="addModalForm">
                     <div class="modal-header">
                         <div class="my-2">
                             <label for="modalNameTask" class="form-label modal-title fs-4 my-2">Please enter a task name :3</label>
-                            <input type="text" class="form-control" id="modalNameTask" placeholder="Example: Make the pie by 6:00 pm">
+                            <input type="text" name="mainTitle" class="form-control" id="modalNameTask" placeholder="Example: Make the pie by 6:00 pm">
                             <button type="button" data-btn-modal="breakPiece" class="btn btn-primary my-2">Break into pieces?</button>
                         </div>
                     </div>
                     <div class="modal-body" style="display: none;">
                         <div class="modal-title fs-5 my-2">Pieces:</div>
                         <div id="modal-pieces">
-                            <input type="text" class="form-control task-piece mb-1" placeholder="Piece name">
+                            <input type="text" name="piece/1" class="form-control task-piece mb-1" placeholder="Piece name">
                         </div>
                     </div>
                 </form>
@@ -88,40 +88,7 @@
         </div>
     </div>
 </div>
-<script>
-    const btns = document.querySelectorAll("button");
-    const modalPieces = document.getElementById("modal-pieces");
-    btns.forEach(btn => {
-        btn.addEventListener("click", function () {
-            const taskVal = this.dataset.btnModal;
-            if (taskVal === "breakPiece") {
-                this.style.display = "none";
-                document.getElementsByClassName("modal-body")[0].style.display = "block";
-            }
-            if (taskVal === "saveChanges") {
-                document.querySelectorAll('[data-btn-modal="breakPiece"]')[0].style['display'] = 'block';
-                document.getElementsByClassName("modal-body")[0].style.display = "none";
-            }
-        })
-    })
-    function addInputListener(input) {
-        input.addEventListener('input', function () {
-            const inputs = modalPieces.querySelectorAll('input.task-piece');
-            if (inputs[inputs.length - 1].value.trim() !== '') {
-                const newInput = document.createElement('input');
-                newInput.type = 'text';
-                newInput.className = 'form-control task-piece mb-1';
-                newInput.placeholder = 'Piece name';
-                modalPieces.appendChild(newInput);
-                addInputListener(newInput);
-            }
-        });
-    }
-
-
-
-    addInputListener(modalPieces.querySelector('input.task-piece'));
-</script>
+<script src="/main.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </body>
 </html>
